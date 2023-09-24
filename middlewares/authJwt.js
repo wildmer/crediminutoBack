@@ -158,12 +158,3 @@ const validateJwtToken = (token) => {
     }
   });
 };
-
-// export {
-//     generateJwtToken,
-//     validateJwtToken,
-//     verifyJwtToken,
-//     isModeratorRole,
-//     isAdminRole,
-//     isAuthorizedRole
-// };

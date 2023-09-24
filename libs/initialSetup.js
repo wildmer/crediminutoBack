@@ -1,5 +1,4 @@
 import Roles from '../models/roles.js';
-// import Roles from '../models/Roles.js';
 
 /**
  * Crea roles por defecto si no existen en la base de datos.

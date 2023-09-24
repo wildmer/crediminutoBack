@@ -45,7 +45,7 @@ export const checkDuplicateEmail = async (req, res, next) => {
 };
 
 /**
- * Middleware para verificar si los roles proporcionados existen en la aplicación.
+ * Middleware para verificar si los roles proporcionados estan duplicados.
  * @param {object} req - Objeto de solicitud.
  * @param {object} res - Objeto de respuesta.
  * @param {function} next - Función para pasar al siguiente middleware.

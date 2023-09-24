@@ -4,11 +4,12 @@ import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 import CONFIG from "../config.js";
+import * as routes from "../routes/index.js";
 
 // TODO: revision de peticiones put con arrays en su estructura body. !! estructure de forma no correcta los datos
 // routes
 // import routerAllotment from '../routes/allotment.js';
-import authRouter from '../routes/auth.js';
+// import authRouter from '../routes/auth.js';
 // import { routerBilling } from '../routes/billing.js';
 // import { routerCost } from '../routes/cost.js';
 // import { routerFarm } from '../routes/farm.js';
@@ -18,7 +19,7 @@ import authRouter from '../routes/auth.js';
 // import routerPeople from '../routes/people.js';
 // import { routerPhase } from '../routes/phase.js';
 // import { routerStore } from '../routes/store.js';
-import routerUser from '../routes/user.js';
+// import routerUser from '../routes/user.js';
 // import { routerTypeOutlay } from '../routes/typeOutlay.js';
 // import { routerWork } from '../routes/work.js';
 // import { routerTransformation } from '../routes/transformation.js';
@@ -44,7 +45,7 @@ class Server {
     }
 
     routes() {
-        this.app.use('/auth', authRouter );
+        this.app.use('/auth', routes.authRouter );
         // this.app.use('/bodega', routerStore );
         // this.app.use('/costo', routerCost );
         // this.app.use('/etapa', routerPhase );
@@ -55,7 +56,7 @@ class Server {
         // this.app.use('/marca', routerMark );
         // this.app.use('/pedido', routerOrder );
         // this.app.use('/persona', routerPeople );
-        this.app.use('/usuario', routerUser );
+        this.app.use('/usuario', routes.routerUser );
         // this.app.use('/tipogasto', routerTypeOutlay );
         // this.app.use('/labor', routerWork );
         // this.app.use('/transformation', routerTransformation );
