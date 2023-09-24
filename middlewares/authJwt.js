@@ -26,27 +26,19 @@ export async function generateJwtToken(payload) {
 
 export const checkRolesExistence = async (req, res, next) => {
   try {
-    let assingRole = null;
+    let assignedRole = null;
 
-    if (req.body.rol) {
-      const foundRole = await Roles.findOne({ name: req.body.rol });
-      // const foundRole = await Roles.find({ name: { $in: rol } });
-      // newUser.rol = foundRole.map(role => role._id);
-      assingRole = foundRole;
-    }
+    const foundRole = await Roles.findOne({ name: req.body.rol });
+    assignedRole = foundRole;
 
-    if (!req.body.rol || !assingRole) {
-      if (req.method === "PUT") {
-        req.body.rol = 0;
-        next();
+    if (!assignedRole) {
+      if (!req.method === "PUT") {
+        const defaultRole = await Roles.findOne({ name: "user" });
+        assignedRole = defaultRole;
       }
-      
-      const defaultRole = await Roles.findOne({ name: "user" });
-      assingRole = defaultRole;
     }
-    // TODO: Al erditar usuario y estar en blanco se cmabbia a user y deveria dejar el que tiene
-    req.body.rol = assingRole._id;
 
+    req.body.rol = assignedRole;
     next();
   } catch (error) {
     console.error("Error al verificar la existencia del rol:", error);

@@ -16,9 +16,7 @@ routerUser.put('/:id', [
     validateId.checkValidId,
     verifySignup.checkChangeDuplicateEmail,
     authJwt.checkRolesExistence,
-    verifySignup.checkChangeSomeRoles,
-    // verifySignup.checkDuplicateEmail, coon la anterior deberla funcomar
-    // TODO: Validar que el rol qur envian sea diferente de lo contraero no guardar o eliminar propiedad 
+    verifySignup.checkAndRemoveDuplicateRole,
 ], usersController.updateUserById);
 
 // Ruta para activar usuario por ID

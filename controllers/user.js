@@ -14,27 +14,23 @@ const usersController = {
     updateUserById: async (req, res) => {
         try {
             const { email, rol } = req.body;
-
-            if (email || rol) {
-                let updatedUser = {
-                    email, rol
-                };
-    
-                console.log(updatedUser)
-    
-                // updatedUser.rol = await validateRol(rol)
-            // TODO: Validar que el rol qur envian sea diferente de lo contraero no guardar o eliminar propiedad 
-    
-                const userUpdated = await User.findByIdAndUpdate(req.params.id, updatedUser);
-    
-                if (userUpdated) {
-                    return res.status(201).json({ msg: "User updated successfully" });
-                } else {
-                    return res.status(404).json({ msg: "User not found" });
-                }
+      
+            if (!email && !rol) {
+              return res.status(201).json({ msg: "User not updated, without changes" });
             }
-            return res.status(200).json({ msg: "User have not get changes for updated " });
+      
+            const updatedUser = {
+              email,
+              rol,
+            };
 
+            const userUpdated = await User.findByIdAndUpdate(req.params.id, updatedUser);
+
+            if (userUpdated) {
+                return res.status(201).json({ msg: "User updated successfully" });
+              } else {
+                return res.status(404).json({ msg: "User not found" });
+              }
         } catch (error) {
             console.error("Error al actualizar usuario:", error);
             return res.status(500).json({ error: "Error al actualizar usuario" });
