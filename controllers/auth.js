@@ -4,9 +4,12 @@ import { generateJwtToken, checkRolesExistence } from '../middlewares/authJwt.js
 const authController = {
     signUp: async (req, res) => {
         try {
-            const { email, password, rol } = req.body;
+            const { name, last_name, number_id, email, password, rol } = req.body;
 
             const newUser = new User({
+                name,
+                last_name,
+                number_id,
                 email,
                 password: await User.encryptPassword(password),
                 rol,
@@ -30,7 +33,7 @@ const authController = {
                 if (!userFound) {
                     return res.status(404).json({ token: null, msg: "Usuario no encontrado" });
                 }
-                
+
                 const matchPassword = await User.comparePassword(req.body.password, userFound.password);
 
                 if (!matchPassword) {

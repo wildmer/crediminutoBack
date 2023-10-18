@@ -18,6 +18,28 @@ export async function generateJwtToken(payload) {
 }
 
 /**
+ * Crea un token JWT a partir de un payload.
+ * @param {object} payload - Datos a incluir en el token.
+ * @returns {string} Token JWT generado.
+ */
+export const verifyMatchPasswords = async (req, res, next) => {
+  try {
+    const password = req.body.password
+    const repeat_password = req.body.repeat_password
+
+    if (!repeat_password === password) {
+      return res.status(401).json({ msg: "passwords not match" });
+
+    }
+
+    next();
+  } catch (error) {
+    return res.status(401).json({ msg: "Error al verificar las contraseñas" });
+  }
+};
+
+
+/**
  * Middleware para verificar si los roles proporcionados existen en la aplicación.
  * @param {object} req - Objeto de solicitud.
  * @param {object} res - Objeto de respuesta.
